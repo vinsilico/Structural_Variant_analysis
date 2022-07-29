@@ -40,7 +40,9 @@ python cigar_edit_pb.py combined_splice.sam
 #Convert the sam file to sorted, indexed bam file using samtools
 
 samtools view -Sb combined_splice_cigar.sam > combined_splice_cigar.bam
+
 samtools sort combined_splice_cigar.bam -o combined_splice_cigar.sorted.bam
+
 samtools index combined_splice_cigar.sorted.bam
 
 #Run cuteSV variant caller with absolute minimal values with parameters.
