@@ -17,21 +17,23 @@ cat  *.fastq > combined.fastq
 #Check the quality of reads using FastQC /PyoQC
 
 fastqc -f fastq -t 26 -o <output_folder> combined.fastq
+
 pycoQC -f sequencing_summary.txt -o pycoQC_output.html
 
 #Trim adapter and demultiplexing of reads using porechop
 
 porechop -i combined.fastq -o combined_porechop.fastq –verbosity 0 –threads 30
+
 porechop -i combined.fastq -b output_folder/ –verbosity 0 –threads 30
 
 #combine all the reads from demultiplexed barcode bins, number of bins, depends on the number of barcodes used.
 
 #Map the reads with minimap2, with splice option and preset parameters for ONT dataset (recommended)
+
 minimap2 -k -splice -ax map-ont reference.fasta combined.fastq > combined_splice.sam
 
-
 #Run the cigar_edit.py script to change the “N” in the CIGAR string to “D”. 
-#This scripts outputs two files (1) sam file with corrected cigar string and (2) text file with original and modified CIGAR string
+#This scripts outputs two files (1) sam file with corrected cigar string and (2) text file with original and modified CIGAR string.
 
 python cigar_edit_pb.py combined_splice.sam
 
