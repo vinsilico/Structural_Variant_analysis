@@ -7,16 +7,20 @@
 #AWS Instance: Analysis was done in AWS EC2 instance c5a.8xlarge (32vCPU and 64 GB RAM)
 
 #Basecalling : Guppy basecaller (fast mode)
+
 guppy_basecaller -i <PATH/TO/INPUT/> -s <PATH/TO/OUTPUT/> --cpu_threads_per_caller INT --num_callers INT -c dna_r9.4.1_450bps_fast.cfg
 
 #Concatenate all the fastq sequences
+
 cat  *.fastq > combined.fastq
 
 #Check the quality of reads using FastQC /PyoQC
+
 fastqc -f fastq -t 26 -o <output_folder> combined.fastq
 pycoQC -f sequencing_summary.txt -o pycoQC_output.html
 
 #Trim adapter and demultiplexing of reads using porechop
+
 porechop -i combined.fastq -o combined_porechop.fastq –verbosity 0 –threads 30
 porechop -i combined.fastq -b output_folder/ –verbosity 0 –threads 30
 
