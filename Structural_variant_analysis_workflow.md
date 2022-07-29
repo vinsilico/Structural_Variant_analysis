@@ -48,19 +48,19 @@ samtools index combined_splice_cigar.sorted.bam
 #Run cuteSV variant caller with absolute minimal values with parameters.
 
 cuteSV /
---max_cluster_bias_INS 1 /
---diff_ratio_merging_INS 0.3 /
---max_cluster_bias_DEL 1 /
---diff_ratio_merging_DEL 0.3 / 
---max_split_parts -1 /
---min_mapq 7 / 
---min_read_len 1 /
---min_support 1 /
---max_size -1 /
---max_cluster_bias_INV 1 / 
---max_cluster_bias_DUP 1 /
---max_cluster_bias_TRA 1 /
-output_splice_cigar.sorted.bam /
-reference.fasta /
-output.vcf /
+--max_cluster_bias_INS 1 
+--diff_ratio_merging_INS 0.3 
+--max_cluster_bias_DEL 1 
+--diff_ratio_merging_DEL 0.3 
+--max_split_parts -1 
+--min_mapq 7 
+--min_read_len 1 
+--min_support 1 
+--max_size -1 
+--max_cluster_bias_INV 1  
+--max_cluster_bias_DUP 1 
+--max_cluster_bias_TRA 1 
+output_splice_cigar.sorted.bam 
+reference.fasta 
+output.vcf 
 working_folder
