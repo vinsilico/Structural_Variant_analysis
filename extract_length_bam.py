@@ -1,11 +1,13 @@
 #!/usr/bin/env python
+
+# Extract mapped read length from bam file and remove duplicates, sort , calculate length (3rd column) and convert to bed file.
+
 import pysam
 import sys
 import os.path
 import pandas as pd
 
 input_bam = sys.argv[1]
-
 ip_bam_file = os.path.splidataset(input_bam)[0]
 
 print(ip_bam_file)
@@ -18,8 +20,8 @@ output_txt = open(op_txt_file, "w")
 output_txt2 = open(op_txt_file2, "w")
 
 bam = pysam.AlignmentFile(input_bam)
-for b in bam.fetch():
-    output_txt.write("{}\t{}\t{}\n".format(b.reference_name, b.reference_start+1, b.reference_end))
+for read in bam.fetch():
+    output_txt.write("{}\t{}\t{}\n".format(read.reference_name, read.reference_start+1, read.reference_end))
 
 uniq_lines = set(open(op_txt_file).readlines())
 out = open(op_txt_file2, 'w').writelines(uniq_lines)
