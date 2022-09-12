@@ -6,12 +6,23 @@
 # This script also writes the original and modified CIGAR string in a text file, for reference.
 
 import sys
+import os.path
 
+#input file names
 input_sam = sys.argv[1]
 
-output_sam = open("output_splice_cigar.sam", "w")
-output_txt = open("output_splice_cigar.txt", "w")
+#extract file names
+ip_sam_file = os.path.splitext(input_sam)[0]
 
+#Output file names
+op_sam_file = ip_sam_file + ".splice_cigar.sam"
+op_txt_file = ip_sam_file + ".splice_cigar.txt"
+
+#open files
+output_sam = open(op_sam_file, "w")
+output_txt = open(op_txt_file, "w")
+
+#process sam file to extract CIGAR string and replace "N" with "D"
 for line in open(input_sam):
         if line[0] == "@":
                 output_sam.write(line)
